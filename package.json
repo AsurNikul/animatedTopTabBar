@@ -1,6 +1,6 @@
 {
-  "name": "animatedTopBar",
-  "version": "0.0.1",
+  "name": "react-native-animated-tab-bar",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -32,5 +32,29 @@
   },
   "engines": {
     "node": ">=16"
-  }
+  },
+  "description": "This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/AsurNikul/animatedTopTabBar.git"
+  },
+  "keywords": [
+    "react-native",
+    "animated",
+    "tab-bar",
+    "segment-control",
+    "top-tab-bat",
+    "animated-tabs",
+    "react-native-components",
+    "react-native-ui",
+    "ios",
+    "android"
+  ],
+  "author": "Nik Solanki",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AsurNikul/animatedTopTabBar/issues"
+  },
+  "homepage": "https://github.com/AsurNikul/animatedTopTabBar#readme"
 }
