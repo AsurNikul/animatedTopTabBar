@@ -24,6 +24,12 @@ interface TopBarProps {
   txtStyle?: TextStyle;
   onItemPress?: (item: any, index: number) => void;
   itemWidth: number;
+  tabBarBackground?: string;
+  tabBarActiveItemColor?: string;
+  tabBarInactiveItemColor?: string;
+  tabBatActiveTxtColor?: string;
+  tabBatInactiveTxtColor?: string;
+  mainScrollContainerStyle?: ViewStyle;
 }
 
 const TopBar = (props: TopBarProps) => {
@@ -36,6 +42,12 @@ const TopBar = (props: TopBarProps) => {
     txtStyle,
     onItemPress,
     itemWidth,
+    tabBarBackground,
+    tabBarActiveItemColor,
+    tabBarInactiveItemColor,
+    tabBatActiveTxtColor,
+    tabBatInactiveTxtColor,
+    mainScrollContainerStyle,
   } = props;
 
   let ITEM_WIDTH = itemWidth;
@@ -58,14 +70,31 @@ const TopBar = (props: TopBarProps) => {
   return (
     <ScrollView
       horizontal
-      contentContainerStyle={{height: HEIGHT / 9}}
+      contentContainerStyle={[
+        {
+          height: HEIGHT / 9,
+          justifyContent: 'center',
+          alignItems: 'center',
+        },
+        mainScrollContainerStyle,
+      ]}
       showsHorizontalScrollIndicator={false}>
-      <View style={[styles.mainContainer, containerStyle]}>
+      <View
+        style={[
+          styles.mainContainer,
+          containerStyle,
+          {
+            backgroundColor: tabBarBackground ? tabBarBackground : '#f1f1f1f1',
+          },
+        ]}>
         <Animated.View
           style={[
             styles.selectedItemContainer,
             selectedItemContainerStyle,
             {
+              backgroundColor: tabBarActiveItemColor
+                ? tabBarActiveItemColor
+                : 'white',
               width: ITEM_WIDTH,
               transform: [
                 {
@@ -88,7 +117,11 @@ const TopBar = (props: TopBarProps) => {
                 itemContainerStyle,
                 {
                   width: ITEM_WIDTH,
-                  backgroundColor: isCurrent ? 'transparent' : '#f1f1f1',
+                  backgroundColor: isCurrent
+                    ? 'transparent'
+                    : tabBarInactiveItemColor
+                    ? tabBarInactiveItemColor
+                    : 'white',
                   marginLeft: isCurrent ? 2 : 0,
                 },
               ]}>
@@ -96,8 +129,20 @@ const TopBar = (props: TopBarProps) => {
                 title={item?.title}
                 txtStyle={[
                   isCurrent
-                    ? {...styles.selectedTxtStyle, ...selectedTxtStyle}
-                    : {...styles.txtStyle, ...txtStyle},
+                    ? {
+                        ...styles.selectedTxtStyle,
+                        color: tabBatActiveTxtColor
+                          ? tabBatActiveTxtColor
+                          : colors.black,
+                        ...selectedTxtStyle,
+                      }
+                    : {
+                        ...styles.txtStyle,
+                        color: tabBatInactiveTxtColor
+                          ? tabBatInactiveTxtColor
+                          : colors.black,
+                        ...txtStyle,
+                      },
                 ]}
               />
             </TouchableOpacity>
@@ -113,17 +158,15 @@ export default TopBar;
 const styles = StyleSheet.create({
   mainContainer: {
     ...commonSty.rowCenter,
-    backgroundColor: '#f1f1f1',
-    height: HEIGHT * 0.082,
+    height: HEIGHT * 0.07,
     borderRadius: 10,
     marginHorizontal: 10,
     paddingHorizontal: 5,
   },
   selectedItemContainer: {
-    height: HEIGHT * 0.07,
+    height: HEIGHT * 0.06,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'white',
     borderRadius: 10,
     position: 'absolute',
     left: 5,
@@ -139,9 +182,11 @@ const styles = StyleSheet.create({
   txtStyle: {
     zIndex: 1,
     color: colors.black,
+    fontSize: HEIGHT / 38,
   },
   selectedTxtStyle: {
     zIndex: 1,
     color: colors.black,
+    fontSize: HEIGHT / 38,
   },
 });

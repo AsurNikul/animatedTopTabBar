@@ -1,79 +1,257 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# `react-native-tab-strip`
 
-# Getting Started
+![Supports iOS and Android][support-badge]![Github Action Badge][gha-badge] ![npm][npm-badge] [![Lean Core Extracted][lean-core-badge]][lean-core-issue]
 
->**Note**: Make sure you have completed the [React Native - Environment Setup](https://reactnative.dev/docs/environment-setup) instructions till "Creating a new application" step, before proceeding.
+An animated tab bar component for React Native.
 
-## Step 1: Start the Metro Server
+## Getting started
 
-First, you will need to start **Metro**, the JavaScript _bundler_ that ships _with_ React Native.
+Install the library using your package manager:
 
-To start Metro, run the following command from the _root_ of your React Native project:
+pnpm:
 
-```bash
-# using npm
-npm start
-
-# OR using Yarn
-yarn start
+```
+pnpm install --save react-native-tab-strip
 ```
 
-## Step 2: Start your Application
+yarn:
 
-Let Metro Bundler run in its _own_ terminal. Open a _new_ terminal from the _root_ of your React Native project. Run the following command to start your _Android_ or _iOS_ app:
-
-### For Android
-
-```bash
-# using npm
-npm run android
-
-# OR using Yarn
-yarn android
+```
+yarn add react-native-tab-strip
 ```
 
-### For iOS
+npm:
 
-```bash
-# using npm
-npm run ios
-
-# OR using Yarn
-yarn ios
+```
+npm install --save react-native-tab-strip
 ```
 
-If everything is set up _correctly_, you should see your new app running in your _Android Emulator_ or _iOS Simulator_ shortly provided you have set up your emulator/simulator correctly.
+Video Demo
+Here's a quick demo of react-native-tab-strip:
 
-This is one way to run your app — you can also run it directly from within Android Studio and Xcode respectively.
+| iOS                                                   | Android                                                    |
+| ----------------------------------------------------- | ---------------------------------------------------------- |
+| <img src="./src/assets/images/ios.png" width="320" /> | <img src="./src/assets//images/android.png" width="320" /> |
 
-## Step 3: Modifying your App
+react-native-tab-strip is a versatile and animated tab bar component designed for React Native applications. It provides an intuitive interface for navigating between tabs with customizable styles and smooth
 
-Now that you have successfully run the app, let's modify it.
+animations.
 
-1. Open `App.tsx` in your text editor of choice and edit some lines.
-2. For **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Developer Menu** (<kbd>Ctrl</kbd> + <kbd>M</kbd> (on Window and Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (on macOS)) to see your changes!
+Key Features
+Animated Tab Bar: Enhance user experience with smooth animations when switching tabs.
 
-   For **iOS**: Hit <kbd>Cmd ⌘</kbd> + <kbd>R</kbd> in your iOS Simulator to reload the app and see your changes!
+Customizable: Tailor the appearance of the tab bar to fit your app's design using various styling options.
+Event Handling: Easily manage tab press events with a simple callback function.
 
-## Congratulations! :tada:
+Flexible Integration: Integrate seamlessly into new or existing React Native projects.
 
-You've successfully run and modified your React Native App. :partying_face:
+## Usage Example
 
-### Now what?
+```javascript
+import AnimatedTabBar from 'react-native-tab-strip';
+```
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [Introduction to React Native](https://reactnative.dev/docs/getting-started).
+## Usage
 
-# Troubleshooting
+Start by importing the library:
 
-If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Use `AnimatedTabBar` to render a Tab bar .
 
-# Learn More
+#### Programmatically changing selected index
 
-To learn more about React Native, take a look at the following resources:
+```javascript
+import AnimatedTabBar from 'react-native-tab-strip';
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+return (
+  <AnimatedTabBar
+    // required
+    data={[{title: 'Tab 1', title: 'Tab 2'}]}
+    // required
+    itemWidth={100}
+    onTabPress={(item, index) => {
+      console.log(`Pressed tab ${index + 1}: ${item} `);
+    }}
+  />
+);
+```
+
+Data:
+
+The data prop is an array of objects, and each object must contain a mandatory property named title. This title will be displayed on the tab item.
+
+```javascript
+<AnimatedTabBar
+  // Required: Array of tab data objects, each containing a 'title' property
+  data={data}
+  // Callback function invoked when a tab is pressed (Optional)
+  onTabPress={(item, index) => {
+    console.log(`Pressed tab ${index + 1}: ${item} `);
+  }}
+  // Width of each tab item (Required)
+  itemWidth={170}
+  // Background color of the tab bar (Optional)
+  tabBarBackground="#ffff"
+  // Color of the active tab item (Optional)
+  tabBarActiveItemColor="#f1f1f1"
+  // Color of inactive tab items (Optional)
+  tabBarInactiveItemColor="white"
+  // Text color of active tab items (Optional)
+  tabBarActiveTxtColor="black"
+  // Text color of inactive tab items (Optional)
+  tabBarInactiveTxtColor="black"
+  // Main container style of the tab bar (Optional)
+  mainScrollContainerStyle={{}}
+  // Optional styles for the main container of the top bar
+  containerStyle={{}}
+  // Optional styles for the selected item container
+  selectedItemContainerStyle={{}}
+  // Optional styles for each tab item container
+  itemContainerStyle={{}}
+  // Optional text style for the selected tab item
+  selectedTxtStyle={{}}
+  // Optional text style for each tab item
+  txtStyle={{}}
+/>
+```
+
+Use code with caution.
+
+Available Props
+
+### `data`
+
+Array of objects defining each tab. Each object must have a `title` property (string).
+
+| Type     | Required |
+| -------- | -------- |
+| object[] | Yes      |
+
+---
+
+### `itemWidth`
+
+Width of each tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| number | Yes      |
+
+---
+
+### `onTabPress`
+
+Callback function invoked when a tab is pressed. Receives the pressed tab data object and its index (zero-based) as arguments.
+
+| Type     | Required |
+| -------- | -------- |
+| function | No       |
+
+---
+
+### `tabBarBackground`
+
+Background color of the tab bar.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### `tabBarActiveItemColor`
+
+Color of the active tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### `tabBarInactiveItemColor`
+
+Color of inactive tab items.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### `tabBarActiveTxtColor`
+
+Text color of active tab items.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### `tabBarInactiveTxtColor`
+
+Text color of inactive tab items.
+
+| Type   | Required |
+| ------ | -------- |
+| string | No       |
+
+---
+
+### `mainScrollContainerStyle`
+
+Style object applied to the main container of the tab bar.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
+### `containerStyle`
+
+Style object applied to the container of the selected tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
+### `selectedItemContainerStyle`
+
+Style object applied to the container of each tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
+### `itemContainerStyle`
+
+Style object applied to the text element of each tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
+### `selectedTxtStyle`
+
+Style object applied to the text element of the selected tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |
+
+---
+
+### `txtStyle`
+
+Style object applied to the text element of each tab item.
+
+| Type   | Required |
+| ------ | -------- |
+| object | No       |

@@ -20,14 +20,7 @@ const Typography: React.FC<Txt> = props => {
   const {txtStyle, title, color, size, font, mt, ml, mr, mb, align} = props;
 
   return (
-    <Text
-      style={[
-        txtStyle,
-        {
-          fontSize: HEIGHT / 35,
-        },
-      ]}
-      {...props}>
+    <Text style={[txtStyle]} {...props}>
       {title}
     </Text>
   );
